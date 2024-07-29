@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  flask:
+    build:
+      context: ./app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - chrome
+    environment:
+      - CHROMEDRIVER_PATH=/usr/local/bin/chromedriver
+    volumes:
+      - ./app:/app
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
+
